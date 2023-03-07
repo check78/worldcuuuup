@@ -1,0 +1,168 @@
+
+
+    local death = Instance.new("Sound")
+    death.Parent = workspace
+    death.Name = "die"
+    death.SoundId = "rbxassetid://5867708670"
+    death.Volume = 0.7
+    death.Pitch = 1
+    local distort = Instance.new("DistortionSoundEffect")
+    distort.Level = 0.9
+    distort.Parent = death
+    local cue = Instance.new("Sound")
+    cue.Parent = workspace
+    cue.Name = "Bubbles"
+    cue.SoundId = "rbxassetid://9113601215"
+    cue.Volume = 1
+    cue.Pitch = 0.6
+    local distort = Instance.new("DistortionSoundEffect")
+    distort.Level = 0.7
+    distort.Parent = cue
+    cue.TimePosition = 1.25
+
+-- clam
+workspace.ChildAdded:Connect(function(seek)
+	if seek.Name == "Claim" then
+	game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+	game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+		wait(2)
+CanKill = true
+	else
+
+	end
+end)
+
+
+local Creator = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors%20Entity%20Spawner/Source.lua"))()
+
+-- Create entity
+
+local entity = Creator.createEntity({
+    CustomName = "Claim", -- Custom name of your entity
+    Model = "rbxassetid://11411321855", -- Can be GitHub file or rbxassetid
+    Speed = 0, -- Percentage, 100 = default Rush speed
+    DelayTime = 0, -- Time before starting cycles (seconds)
+    HeightOffset = 0,
+    CanKill = false,
+    BreakLights = false,
+    KillRange = 40,
+    BackwardsMovement = true,
+    FlickerLights = {
+        false, -- Enabled
+        2.5, -- Time (seconds)
+    },
+    Cycles = {
+        Min = 1,
+        Max = 1
+    },
+    CamShake = {
+        false, -- Enabled
+        {5, 15, 0.1, 1}, -- Shake values (don't change if you don't know)
+        30, -- Shake start distance (from Entity to you)
+    },
+    Jumpscare = {
+        false, -- Enabled ('false' if you don't want jumpscare)
+        {
+            Image1 = "https://www.roblox.com/library/11862656491", -- Image1 url
+            Image2 = "https://www.roblox.com/library/11862656491", -- Image2 url
+            Shake = false,
+            Sound1 = {
+                0, -- SoundId
+                { Volume = 0.5 }, -- Sound properties
+            },
+            Sound2 = {
+                5567523008, -- SoundId
+                { Volume = 0.5 }, -- Sound properties
+            },
+            Flashing = {
+                true, -- Enabled
+                Color3.fromRGB(6, 38, 135), -- Color
+            },
+            Tease = {
+                false, -- Enabled ('false' if you don't want tease)
+                Min = 1,
+                Max = 3,
+            },
+        },
+    },
+    CustomDialog = {"You died to Rebound...", "It appears at the next door and has a chance to stay there or run back to the latest door.", "He will come back many times after his initial spawn", "so hide every next door until it is safe.."}, -- Custom death message (can be as long as you want)
+})
+
+-----[[ Advanced ]]-----
+
+entity.Debug.OnEntitySpawned = function(entityModel)
+    print("Entity has spawned:", entityModel)
+local particle = workspace.Claim.RushNew.Attachment
+particle.ParticleEmitter.Enabled = false
+particle.Spark.Enabled = false
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+particle.Spark.Enabled = true
+cue:Play()
+wait(2)
+KillRange = 40
+particle.ParticleEmitter.Enabled = true
+end
+
+entity.Debug.OnEntityDespawned = function(entityModel)
+    print("Entity has despawned:", entityModel)
+end
+
+entity.Debug.OnEntityStartMoving = function(entityModel)
+    print("Entity has started moving:", entityModel)
+    game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+    game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+    wait(2)
+    local TweenService = game:GetService("TweenService")
+    local cue2 = Instance.new("Sound")
+    cue2.Parent = workspace.Claim.RushNew
+    cue2.Name = "Idle"
+    cue2.SoundId = "rbxassetid://8256091246"
+    cue2.Volume = 1
+    cue2.Pitch = 4
+    local distort = Instance.new("DistortionSoundEffect")
+    distort.Level = 0.9
+    distort.Parent = cue2
+local fl = Instance.new("FlangeSoundEffect")
+fl.Depth = 0.06
+fl.Mix = 0.85
+fl.Rate = 5
+fl.Parent = cue2
+	cue2.RollOffMaxDistance = 90
+	cue2.RollOffMinDistance = 5
+	cue2.RollOffMode = Enum.RollOffMode.LinearSquare
+    local TW = TweenService:Create(cue2, TweenInfo.new(1.5),{Pitch = 0})
+    local TW2 = TweenService:Create(cue2, TweenInfo.new(1.5),{Volume = 0})
+    local TW3 = TweenService:Create(cue2, TweenInfo.new(1.5),{Volume = 1})
+    cue2:Play()
+    TW3:Play()
+    KillRange = 40
+    wait(11)
+	workspace.Claim.RushNew.Anchored = false
+	workspace.Claim.RushNew.CanCollide = false
+    TW:Play()
+    TW2:Play()
+    wait(2)
+    workspace.Claim:Destroy()
+    death:Destroy()
+    cue:Destroy()
+end
+
+entity.Debug.OnEntityEnteredRoom = function(entityTable, room)
+    print("Entity:", "has entered room:", room)
+end
+
+entity.Debug.OnEntityFinishedRebound = function(entityModel)
+    print("Entity finished rebound:", entityModel)
+end
+
+entity.Debug.OnDeath = function()
+    warn("You died.")
+    firesignal(game.ReplicatedStorage.EntityInfo.DeathHint.OnClientEvent, {"You died to Matcher", "Running will not help, Try Hiding when you know its near.", "Pay attention for cues that hint its arrival."}, "Blue")
+    death:Play()
+end
+
+------------------------
+
+-- Run the created entity
+Creator.runEntity(entity)
