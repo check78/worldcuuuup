@@ -1,0 +1,45 @@
+-- 1
+workspace.ChildAdded:Connect(function(rush)
+	if rush.Name == "RushMoving" then
+		wait(0.6)
+        workspace.Blink:Destroy()
+	else
+
+	end
+end)
+-- 2
+workspace.ChildAdded:Connect(function(match)
+	if match.Name == "Matcher" then
+		wait(0.6)
+        workspace.Blink:Destroy()
+	else
+
+	end
+end)
+-- 3
+workspace.ChildAdded:Connect(function(rebound)
+	if rebound.Name == "Bound" then
+		wait(0.6)
+        workspace.Blink:Destroy()
+	else
+
+	end
+end)
+-- 4
+workspace.ChildAdded:Connect(function(bound)
+	if bound.Name == "Rebound" then
+		wait(0.6)
+        workspace.Blink:Destroy()
+	else
+
+	end
+end)
+-- 5
+workspace.ChildAdded:Connect(function(bush)
+	if bush.Name == "AmbushMoving" then
+		wait(0.6)
+        workspace.Blink:Destroy()
+	else
+
+	end
+end)
