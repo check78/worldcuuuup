@@ -1,5 +1,4 @@
 
-
 firesignal(game:GetService("ReplicatedStorage").EntityInfo.Caption.OnClientEvent, 'You Executed the Script',true,2)
 wait(1)
 firesignal(game:GetService("ReplicatedStorage").EntityInfo.Caption.OnClientEvent, 'Credits to zavaled for Making Endless Doors',true,1)
@@ -11,7 +10,7 @@ game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
 -- Rebound
 coroutine.wrap(function()
     while true do
-        wait(math.random(150,750))
+        wait(350)
         game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
           if workspace.Ambience_Seek.Playing == true or workspace.Ambience_Figure.Playing == true then
           return
@@ -24,7 +23,7 @@ end)()
 -- Overseer Eyes
 coroutine.wrap(function()
     while true do
-        wait(math.random(55,250))
+        wait(150)
 game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
   if workspace.Ambience_Seek.Playing == true or workspace.Ambience_Figure.Playing == true then
           return
@@ -37,7 +36,7 @@ end)()
 -- Matcher
 coroutine.wrap(function()
     while true do
-        wait(math.random(30,150))
+        wait(150)
         game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
           if workspace.Ambience_Seek.Playing == true or workspace.Ambience_Figure.Playing == true then
           return
@@ -50,7 +49,7 @@ end)()
 -- Claim
 coroutine.wrap(function()
     while true do
-        wait(math.random(350,750))
+        wait(750)
         game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
           if workspace.Ambience_Seek.Playing == true or workspace.Ambience_Figure.Playing == true then
           return
@@ -62,7 +61,7 @@ end)()
 -- Blink
 coroutine.wrap(function()
     while true do
-        wait(math.random(160,860))
+        wait(950)
         game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
           if workspace.Ambience_Seek.Playing == true or workspace.Ambience_Figure.Playing == true then
           return
@@ -74,7 +73,7 @@ end)()
 -- Greed
 coroutine.wrap(function()
     while true do
-        wait(math.random(60,250))
+        wait(450)
         game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
           if workspace.Ambience_Seek.Playing == true or workspace.Ambience_Figure.Playing == true then
           return
